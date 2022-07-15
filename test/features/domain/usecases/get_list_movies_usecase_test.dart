@@ -29,13 +29,13 @@ void main() {
     ];
     //listen to calls in the repository ↓↓↓
     //when the repository is called at some point side Right is the expected result
-    when(repository.getListMoviesPopular)
+    when(repository.getListPopularMovies)
         .thenAnswer((_) async => Right(movies));
     //do the call to the usecase ↓↓↓
     final result = await useCase(NoParams());
     //verify the result ↓↓↓
     expect(result, Right(movies));
-    verify(repository.getListMoviesPopular);
+    verify(repository.getListPopularMovies);
     verifyNoMoreInteractions(repository);
   });
 }

@@ -12,6 +12,6 @@ class GetListMoviesTrendingUsecase
 
   @override
   Future<Either<Failure, List<MovieEntity>>> call(NoParams noParams) async {
-    return await _repository.getListMoviesTrending();
+    return await _repository.getListTrendingMovies();
   }
 }

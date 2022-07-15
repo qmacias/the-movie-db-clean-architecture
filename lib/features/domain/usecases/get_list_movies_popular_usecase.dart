@@ -12,6 +12,6 @@ class GetListMoviesPopularUseCase
 
   @override
   Future<Either<Failure, List<MovieEntity>>> call(NoParams params) async {
-    return await repository.getListMoviesPopular();
+    return await repository.getListPopularMovies();
   }
 }
