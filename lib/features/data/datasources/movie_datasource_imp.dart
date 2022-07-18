@@ -33,15 +33,20 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
 
   @override
   Future<List<MovieModel>> getListTrendingMovies() async {
-    return Future.delayed(const Duration(seconds: 1), () {
-      return [
-        const MovieModel(
-          title: 'title',
-          posterPath: 'posterPath',
-          releaseDate: 'releaseDate',
-          voteAverage: 1,
-        ),
-      ];
-    });
+    final response = await client.get(
+      TheMoviedbEndpoints.trendingMovies(ThemovieDBKey.apiKey),
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.data);
+      List<MovieModel> listTrendingMovies = [];
+      listTrendingMovies = json['results']
+          .map<MovieModel>((movie) => MovieModel.fromJson(movie))
+          .toList();
+      return listTrendingMovies;
+    } else if (response.statusCode == 503) {
+      throw const ServerException();
+    } else {
+      throw Exception();
+    }
   }
 }
