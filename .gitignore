@@ -34,8 +34,7 @@
 analysis_options.yaml
 pubspec.lock
 /build/
-
-
+/lib/core/utils/keys/themoviedb_key.dart
 # Web related
 lib/generated_plugin_registrant.dart
 
