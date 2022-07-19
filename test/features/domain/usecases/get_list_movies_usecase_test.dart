@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/entities/movie_entity.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/repositories/movie_repository.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/usecases/get_list_movies_popular_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_popular_usecase.dart';
 
 class MockMovieRepository extends Mock implements MovieRepository {}
 
@@ -20,7 +20,7 @@ void main() {
   test('should get popular movies', () async {
     //population list_movies
     final movies = [
-      MovieEntity(
+      const MovieEntity(
         title: 'title',
         posterPath: 'posterPath',
         releaseDate: 'releaseDate',

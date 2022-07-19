@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/exceptions.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/failures.dart';
-import 'package:the_movies_db_clean_architecture/features/data/datasources/movie_datasource.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/entities/movie_entity.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/repositories/movie_repository.dart';
+import 'package:the_movies_db_clean_architecture/data/datasources/movie_datasource.dart';
+import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
 
 class MovieRepositoryImp implements MovieRepository {
   final MovieDatasource movieDatasource;

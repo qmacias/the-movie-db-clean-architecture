@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:the_movies_db_clean_architecture/core/errors/exceptions.dart';
 import 'package:the_movies_db_clean_architecture/core/http_client/http_client.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/keys/themoviedb_key.dart';
-import 'package:the_movies_db_clean_architecture/features/data/datasources/endpoints/themoviedb_endpoints.dart';
-import 'package:the_movies_db_clean_architecture/features/data/datasources/movie_datasource.dart';
-import 'package:the_movies_db_clean_architecture/features/data/models/movie_model.dart';
+import 'package:the_movies_db_clean_architecture/data/datasources/endpoints/themoviedb_endpoints.dart';
+import 'package:the_movies_db_clean_architecture/data/datasources/movie_datasource.dart';
+import 'package:the_movies_db_clean_architecture/data/models/movie_model.dart';
 
 class TheMoviedbDatasourceImp implements MovieDatasource {
   final HttpClient client;

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:the_movies_db_clean_architecture/features/data/models/movie_model.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/entities/movie_entity.dart';
+import 'package:the_movies_db_clean_architecture/data/models/movie_model.dart';
+import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 
 import '../../../mocks/movie_mock.dart';
 

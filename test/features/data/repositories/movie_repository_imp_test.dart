@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/exceptions.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/failures.dart';
-import 'package:the_movies_db_clean_architecture/features/data/datasources/movie_datasource.dart';
-import 'package:the_movies_db_clean_architecture/features/data/models/movie_model.dart';
-import 'package:the_movies_db_clean_architecture/features/data/repositories/movie_repository_imp.dart';
-import 'package:the_movies_db_clean_architecture/features/domain/repositories/movie_repository.dart';
+import 'package:the_movies_db_clean_architecture/data/datasources/movie_datasource.dart';
+import 'package:the_movies_db_clean_architecture/data/models/movie_model.dart';
+import 'package:the_movies_db_clean_architecture/data/repositories/movie_repository_imp.dart';
+import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
 
 class MockMovieDatasource extends Mock implements MovieDatasource {}
 
