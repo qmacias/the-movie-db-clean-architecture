@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     repository = MockMovieRepository();
-    useCase = GetListMoviesPopularUseCase(repository);
+    useCase = GetListMoviesPopularUseCase(repository: repository);
   });
 
   test('should get popular movies', () async {

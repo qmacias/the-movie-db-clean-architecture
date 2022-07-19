@@ -16,7 +16,7 @@ void main() {
 
   setUp(() {
     movieDatasource = MockMovieDatasource();
-    movieRepositoryImp = MovieRepositoryImp(movieDatasource);
+    movieRepositoryImp = MovieRepositoryImp(movieDatasource: movieDatasource);
   });
 
   group('MovieRepositoryImp', () {

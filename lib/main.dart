@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_popular_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_trending_usecase.dart';
+import 'package:the_movies_db_clean_architecture/features/presentation/bloc/movie_bloc.dart';
+import 'package:the_movies_db_clean_architecture/injection_container.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,17 +15,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return
-        // BlocProvider<MovieBloc>(
-        //   create: (context) => MovieBloc(),
-        //  child:
-        MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider<MovieBloc>(
+      create: (context) => MovieBloc(
+        getListMoviesPopularUseCase: getIt<GetListMoviesPopularUseCase>(),
+        getListMoviesTrendingUsecase: getIt<GetListMoviesTrendingUsecase>(),
       ),
-      home: Container(),
-      //  ),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Container(),
+      ),
     );
   }
 }

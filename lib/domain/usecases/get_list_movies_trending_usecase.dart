@@ -6,12 +6,12 @@ import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repos
 
 class GetListMoviesTrendingUsecase
     implements UseCase<List<MovieEntity>, NoParams> {
-  GetListMoviesTrendingUsecase(this._repository);
+  GetListMoviesTrendingUsecase({required this.repository});
 
-  final MovieRepository _repository;
+  final MovieRepository repository;
 
   @override
   Future<Either<Failure, List<MovieEntity>>> call(NoParams noParams) async {
-    return await _repository.getListTrendingMovies();
+    return await repository.getListTrendingMovies();
   }
 }

@@ -8,7 +8,7 @@ import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repos
 class MovieRepositoryImp implements MovieRepository {
   final MovieDatasource movieDatasource;
 
-  MovieRepositoryImp(this.movieDatasource);
+  MovieRepositoryImp({required this.movieDatasource});
   @override
   Future<Either<Failure, List<MovieEntity>>> getListPopularMovies() async {
     try {

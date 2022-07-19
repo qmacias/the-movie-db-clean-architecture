@@ -8,7 +8,7 @@ class GetListMoviesPopularUseCase
     implements UseCase<List<MovieEntity>, NoParams> {
   final MovieRepository repository;
 
-  GetListMoviesPopularUseCase(this.repository);
+  GetListMoviesPopularUseCase({required this.repository});
 
   @override
   Future<Either<Failure, List<MovieEntity>>> call(NoParams params) async {

@@ -10,7 +10,7 @@ import 'package:the_movies_db_clean_architecture/data/models/movie_model.dart';
 class TheMoviedbDatasourceImp implements MovieDatasource {
   final HttpClient client;
 
-  TheMoviedbDatasourceImp(this.client);
+  TheMoviedbDatasourceImp({required this.client});
 
   @override
   Future<List<MovieModel>> getListPopularMovies() async {

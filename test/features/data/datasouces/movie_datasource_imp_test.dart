@@ -18,7 +18,7 @@ void main() {
   setUp(() {
     client = MockHttpClient();
     //client = HttpClientImp();
-    movieDatasourceImp = TheMoviedbDatasourceImp(client);
+    movieDatasourceImp = TheMoviedbDatasourceImp(client: client);
   });
 
   group("Movie Datasource |", () {
