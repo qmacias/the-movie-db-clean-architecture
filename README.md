@@ -1,16 +1,25 @@
-# the_movies_db_clean_architecture
+# TheMovieDB
+<img width="100" src="https://user-images.githubusercontent.com/37156004/178585291-beafcf5e-fa0d-4317-a046-604aa1c30348.JPEG"/>
 
-A new Flutter project.
+ 
+# Telas implementadas
 
-## Getting Started
+![themoviedb](https://user-images.githubusercontent.com/37156004/180076086-ee9cf96d-fb72-4f59-a65c-6c7405978f76.gif)
 
-This project is a starting point for a Flutter application.
+<h1> Como usar </h1>
+Antes de tudo, configure o ambiente Flutter da sua maquina, veja mais em https://flutter.dev/docs/get-started/install
 
-A few resources to get you started if this is your first Flutter project:
+- Faça o clone do repositório:
+$ git clone https://github.com/WemersonDamasceno/the-movie-db.git
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Entre na pasta:
+$ cd the-movie-db-clean-architecture
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Instale as dependencias:
+$ flutter pub get
+
+- Execute o App com o comando: 
+$ flutter run
+
+
+Made with :heart: and Flutter.
