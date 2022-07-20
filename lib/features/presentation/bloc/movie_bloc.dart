@@ -15,16 +15,15 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   MovieBloc({
     required this.getListMoviesPopularUseCase,
     required this.getListMoviesTrendingUsecase,
-  }) : super(const MovieLoadingState(isLoading: true)) {
+  }) : super(const PopularMovieLoadingState()) {
     on<PopularMoviesLoadEvent>((event, emit) async {
       //display circularProgress while making api call
-      emit(const MovieLoadingState(isLoading: true));
+      emit(const PopularMovieLoadingState());
       //call my userCases
       final failureOrSucess = await getListMoviesPopularUseCase(NoParams());
 
       //verify if the call was successful
       //if my userCases return success, display the data
-      emit(const MovieLoadingState(isLoading: false));
       emit(
         failureOrSucess.fold(
             (failure) =>
@@ -33,10 +32,9 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       );
     });
     on<TrendingMoviesLoadEvent>((event, emit) async {
-      emit(const MovieLoadingState(isLoading: true));
+      emit(const PopularMovieLoadingState());
 
       final failureOrSucess = await getListMoviesTrendingUsecase(NoParams());
-      emit(const MovieLoadingState(isLoading: false));
       emit(
         failureOrSucess.fold(
             (failure) =>

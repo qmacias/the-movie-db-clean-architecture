@@ -7,9 +7,12 @@ abstract class MovieState extends Equatable {
   List<Object> get props => [];
 }
 
-class MovieLoadingState extends MovieState {
-  final bool isLoading;
-  const MovieLoadingState({required this.isLoading});
+class PopularMovieLoadingState extends MovieState {
+  const PopularMovieLoadingState();
+}
+
+class TrendingMovieLoadingState extends MovieState {
+  const TrendingMovieLoadingState();
 }
 
 class PopularMoviesLoadedState extends MovieState {

@@ -14,26 +14,26 @@ final getIt = GetIt.instance;
 Future<void> init() async {
   //register blocs
   getIt.registerFactory<MovieBloc>(() => MovieBloc(
-        getListMoviesPopularUseCase: getIt<GetListMoviesPopularUseCase>(),
-        getListMoviesTrendingUsecase: getIt<GetListMoviesTrendingUsecase>(),
+        getListMoviesPopularUseCase: getIt(),
+        getListMoviesTrendingUsecase: getIt(),
       ));
 
   //register usecases
-  getIt.registerLazySingleton(
-    () => GetListMoviesPopularUseCase(repository: getIt<MovieRepository>()),
+  getIt.registerLazySingleton<GetListMoviesPopularUseCase>(
+    () => GetListMoviesPopularUseCase(repository: getIt()),
   );
-  getIt.registerLazySingleton(
-    () => GetListMoviesTrendingUsecase(repository: getIt<MovieRepository>()),
+  getIt.registerLazySingleton<GetListMoviesTrendingUsecase>(
+    () => GetListMoviesTrendingUsecase(repository: getIt()),
   );
 
   //register repositories
   getIt.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImp(movieDatasource: getIt<MovieDatasource>()),
+    () => MovieRepositoryImp(movieDatasource: getIt()),
   );
 
   //register datasources
   getIt.registerLazySingleton<MovieDatasource>(
-    () => TheMoviedbDatasourceImp(client: getIt<HttpClient>()),
+    () => TheMoviedbDatasourceImp(client: getIt()),
   );
 
   //register http client
