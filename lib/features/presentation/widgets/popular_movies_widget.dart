@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/constants/custom_styles.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/bloc/movie_bloc.dart';
-import 'package:the_movies_db_clean_architecture/features/presentation/pages/home_page_mixin.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/widgets/list_movies_widget.dart';
 
-class PopularMoviesWidget extends StatelessWidget with HomePageMixin {
+class PopularMoviesWidget extends StatelessWidget {
   final List<MovieEntity> listPopularMovies;
 
   const PopularMoviesWidget({
