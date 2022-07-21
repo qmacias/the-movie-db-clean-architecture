@@ -16,7 +16,7 @@ void main() {
 
   setUp(() {});
 
-  group('MovieModel', () {
+  group('MovieModel |', () {
     test('should be a subclass of MovieEntity', () {
       expect(movieModel, isA<MovieEntity>());
     });
