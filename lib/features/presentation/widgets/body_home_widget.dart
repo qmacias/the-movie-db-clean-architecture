@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/constants/custom_styles.dart';
-import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:the_movies_db_clean_architecture/core/utils/enums/enums.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/bloc/movie_bloc.dart';
-import 'package:the_movies_db_clean_architecture/features/presentation/widgets/popular_movies_widget.dart';
-import 'package:the_movies_db_clean_architecture/features/presentation/widgets/trending_movies_widget.dart';
+import 'package:the_movies_db_clean_architecture/features/presentation/widgets/list_movies_popular_or_trending_widget.dart';
 
 class BodyHomeWidget extends StatefulWidget {
   const BodyHomeWidget({Key? key}) : super(key: key);
@@ -14,9 +13,6 @@ class BodyHomeWidget extends StatefulWidget {
 }
 
 class _BodyHomeWidgetState extends State<BodyHomeWidget> {
-  List<MovieEntity> listPopularMovies = [];
-  List<MovieEntity> listTrendingMovies = [];
-
   late MovieBloc blocContext;
 
   @override
@@ -28,10 +24,7 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
   initBloc(BuildContext context) {
     blocContext = BlocProvider.of<MovieBloc>(context);
     blocContext.add(
-      PopularMoviesLoadEvent(listPopularMovies: listPopularMovies),
-    );
-    blocContext.add(
-      TrendingMoviesLoadEvent(listTrendingMovies: listTrendingMovies),
+      const PopularMoviesLoadEvent(listPopularMovies: []),
     );
   }
 
@@ -45,8 +38,8 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
+            children: const [
+              Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 5),
                 child: Text(
                   'Os Mais Populares',
@@ -55,18 +48,18 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
               ),
               SizedBox(
                 height: 300,
-                child: PopularMoviesWidget(
-                  listPopularMovies: listPopularMovies,
+                child: ListMoviePopularOrTrendingWidget(
+                  movieTypeEnum: MoviesTypeEnum.popularMovies,
                 ),
               ),
-              const Text(
+              Text(
                 'Em Tendencia',
                 style: CustomStyles.styleTextTopic,
               ),
               SizedBox(
                 height: 300,
-                child: TrendingMoviesWidget(
-                  listTrendingMovies: listTrendingMovies,
+                child: ListMoviePopularOrTrendingWidget(
+                  movieTypeEnum: MoviesTypeEnum.trendingMovies,
                 ),
               ),
             ],

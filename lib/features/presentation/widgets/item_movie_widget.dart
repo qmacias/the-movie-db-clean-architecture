@@ -168,7 +168,7 @@ class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
                 style: CustomStyles.stylePopupMenu,
               ),
             ),
-            value: PopMenuValue.addToAList,
+            value: PopMenuValueEnum.addToAList,
           ),
           const PopupMenuItem(
             child: ListTile(
@@ -181,7 +181,7 @@ class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
                 style: CustomStyles.stylePopupMenu,
               ),
             ),
-            value: PopMenuValue.addToFavorites,
+            value: PopMenuValueEnum.addToFavorites,
           ),
           const PopupMenuItem(
             child: ListTile(
@@ -191,7 +191,7 @@ class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
                 style: CustomStyles.stylePopupMenu,
               ),
             ),
-            value: PopMenuValue.addListIntersted,
+            value: PopMenuValueEnum.addListIntersted,
           ),
           const PopupMenuItem(
             child: ListTile(
@@ -201,7 +201,7 @@ class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
                 style: CustomStyles.stylePopupMenu,
               ),
             ),
-            value: PopMenuValue.addYourAvaliation,
+            value: PopMenuValueEnum.addYourAvaliation,
           ),
         ];
       },
