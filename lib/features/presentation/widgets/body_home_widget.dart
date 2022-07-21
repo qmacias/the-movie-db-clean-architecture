@@ -25,7 +25,7 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
     super.initState();
   }
 
-  initBloc(BuildContext context) async {
+  initBloc(BuildContext context) {
     blocContext = BlocProvider.of<MovieBloc>(context);
     blocContext.add(
       PopularMoviesLoadEvent(listPopularMovies: listPopularMovies),

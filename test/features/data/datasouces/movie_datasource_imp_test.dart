@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/exceptions.dart';
 import 'package:the_movies_db_clean_architecture/core/http_client/http_client.dart';
-import 'package:the_movies_db_clean_architecture/data/datasources/movie_datasource_imp.dart';
+import 'package:the_movies_db_clean_architecture/data/datasources/themoviedb_datasource_imp.dart';
 import 'package:the_movies_db_clean_architecture/data/models/movie_model.dart';
 
 import '../../../mocks/movie_mock.dart';
