@@ -4,7 +4,7 @@
  
 # Telas implementadas
 
-![themoviedb](https://user-images.githubusercontent.com/37156004/180076086-ee9cf96d-fb72-4f59-a65c-6c7405978f76.gif)
+![themoviedb](https://user-images.githubusercontent.com/37156004/180267667-802dc545-1d10-40ce-a040-aa31e1044cb1.gif)
 
 <h1> Como usar </h1>
 Antes de tudo, configure o ambiente Flutter da sua maquina, veja mais em https://flutter.dev/docs/get-started/install
