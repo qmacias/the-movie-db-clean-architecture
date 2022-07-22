@@ -16,6 +16,8 @@ class MovieRepositoryImp implements MovieRepository {
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());
+    } on NotFoundException {
+      return Left(NotFoundFailure());
     }
   }
 
@@ -26,6 +28,8 @@ class MovieRepositoryImp implements MovieRepository {
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());
+    } on NotFoundException {
+      return Left(NotFoundFailure());
     }
   }
 }

@@ -26,6 +26,8 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
       return listPopularMovies;
     } else if (response.statusCode == 503) {
       throw const ServerException();
+    } else if (response.statusCode == 404) {
+      throw const NotFoundException();
     } else {
       throw Exception();
     }
@@ -45,6 +47,8 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
       return listTrendingMovies;
     } else if (response.statusCode == 503) {
       throw const ServerException();
+    } else if (response.statusCode == 404) {
+      throw const NotFoundException();
     } else {
       throw Exception();
     }

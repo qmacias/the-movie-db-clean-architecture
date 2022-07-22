@@ -5,8 +5,8 @@ import 'package:the_movies_db_clean_architecture/data/datasources/movie_datasour
 import 'package:the_movies_db_clean_architecture/data/datasources/themoviedb_datasource_imp.dart';
 import 'package:the_movies_db_clean_architecture/data/repositories/movie_repository_imp.dart';
 import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
-import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_popular_usecase.dart';
-import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_trending_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_popular_movies_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_trending_movies_usecase.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/bloc/movie_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -19,11 +19,11 @@ Future<void> init() async {
       ));
 
   //register usecases
-  getIt.registerLazySingleton<GetListMoviesPopularUseCase>(
-    () => GetListMoviesPopularUseCase(repository: getIt()),
+  getIt.registerLazySingleton<GetListPopularMoviesUseCase>(
+    () => GetListPopularMoviesUseCase(repository: getIt()),
   );
-  getIt.registerLazySingleton<GetListMoviesTrendingUsecase>(
-    () => GetListMoviesTrendingUsecase(repository: getIt()),
+  getIt.registerLazySingleton<GetListTrendingMoviesUsecase>(
+    () => GetListTrendingMoviesUsecase(repository: getIt()),
   );
 
   //register repositories

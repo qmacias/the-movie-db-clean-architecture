@@ -4,9 +4,9 @@ import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
 
-class GetListMoviesTrendingUsecase
+class GetListTrendingMoviesUsecase
     implements UseCase<List<MovieEntity>, NoParams> {
-  GetListMoviesTrendingUsecase({required this.repository});
+  GetListTrendingMoviesUsecase({required this.repository});
 
   final MovieRepository repository;
 

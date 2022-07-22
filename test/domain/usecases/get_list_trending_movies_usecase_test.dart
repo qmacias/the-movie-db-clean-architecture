@@ -5,22 +5,21 @@ import 'package:the_movies_db_clean_architecture/core/errors/failures.dart';
 import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
-import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_popular_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_trending_movies_usecase.dart';
 
 class MockMovieRepository extends Mock implements MovieRepository {}
 
 void main() {
-  late GetListMoviesPopularUseCase useCase;
+  late GetListTrendingMoviesUsecase usecase;
   late MovieRepository repository;
 
   setUp(() {
     repository = MockMovieRepository();
-    useCase = GetListMoviesPopularUseCase(repository: repository);
+    usecase = GetListTrendingMoviesUsecase(repository: repository);
   });
 
-  group("GetMoviesPopular |", () {
-    test('should get popular movies', () async {
-      //population list_movies
+  group("GetMoviesTrending |", () {
+    test("should get trending movies", () async {
       final movies = [
         const MovieEntity(
           title: 'title',
@@ -29,24 +28,29 @@ void main() {
           voteAverage: 1,
         )
       ];
-      //listen to calls in the repository ↓↓↓
-      //when the repository is called at some point side Right is the expected result
-      when(repository.getListPopularMovies)
+      when(repository.getListTrendingMovies)
           .thenAnswer((_) async => Right(movies));
-      //do the call to the usecase ↓↓↓
-      final result = await useCase(NoParams());
-      //verify the result ↓↓↓
+      final result = await usecase(NoParams());
       expect(result, Right(movies));
-      verify(repository.getListPopularMovies);
+      verify(repository.getListTrendingMovies);
       verifyNoMoreInteractions(repository);
     });
 
-    test('should return server error', () async {
-      when(repository.getListPopularMovies)
+    test("should return server error", () async {
+      when(repository.getListTrendingMovies)
           .thenAnswer((_) async => Left(ServerFailure()));
-      final result = await useCase(NoParams());
+      final result = await usecase(NoParams());
       expect(result, Left(ServerFailure()));
-      verify(repository.getListPopularMovies);
+      verify(repository.getListTrendingMovies);
+      verifyNoMoreInteractions(repository);
+    });
+
+    test("should retun a notFoundError", () async {
+      when(repository.getListTrendingMovies)
+          .thenAnswer((_) async => Left(NotFoundFailure()));
+      final result = await usecase(NoParams());
+      expect(result, Left(NotFoundFailure()));
+      verify(repository.getListTrendingMovies);
       verifyNoMoreInteractions(repository);
     });
   });

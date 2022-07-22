@@ -2,15 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
-import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_popular_usecase.dart';
-import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_movies_trending_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_popular_movies_usecase.dart';
+import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_trending_movies_usecase.dart';
 
 part 'movie_event.dart';
 part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  final GetListMoviesPopularUseCase getListMoviesPopularUseCase;
-  final GetListMoviesTrendingUsecase getListMoviesTrendingUsecase;
+  final GetListPopularMoviesUseCase getListMoviesPopularUseCase;
+  final GetListTrendingMoviesUsecase getListMoviesTrendingUsecase;
 
   MovieBloc({
     required this.getListMoviesPopularUseCase,

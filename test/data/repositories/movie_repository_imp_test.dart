@@ -21,7 +21,7 @@ void main() {
 
   group('MovieRepositoryImp PopularMovies', () {
     test('should be the same instance of MovieRepositoryImp', () {
-      expect(movieRepositoryImp, isA<MovieRepositoryImp>());
+      expect(movieRepositoryImp, isA<MovieRepository>());
     });
 
     test('should return a list of model movies when calls the datasource',
@@ -39,8 +39,6 @@ void main() {
           .thenAnswer((_) async => movies);
       final result = await movieRepositoryImp.getListPopularMovies();
       expect(result, Right(movies));
-      verify(movieDatasource.getListPopularMovies);
-      verifyNoMoreInteractions(movieDatasource);
     });
 
     test(
@@ -48,20 +46,21 @@ void main() {
         () async {
       when(movieDatasource.getListPopularMovies)
           .thenThrow(const ServerException());
-
       final result = await movieRepositoryImp.getListPopularMovies();
-
       expect(result, Left(ServerFailure()));
-      verify(movieDatasource.getListPopularMovies);
-      verifyNoMoreInteractions(movieDatasource);
+    });
+
+    test(
+        'should return a notFoundFailure when calls the datasource is unsuccessful',
+        () async {
+      when(movieDatasource.getListPopularMovies)
+          .thenThrow(const NotFoundException());
+      final result = await movieRepositoryImp.getListPopularMovies();
+      expect(result, Left(NotFoundFailure()));
     });
   });
 
   group("MovieRepositoryImp TrendingMovies |", () {
-    test("should be the same instance of MovieRepositoryImp", () {
-      expect(movieRepositoryImp, isA<MovieRepositoryImp>());
-    });
-
     test("should return a list of model movies when calls the datasource",
         () async {
       final movies = [
@@ -72,13 +71,10 @@ void main() {
           voteAverage: 1,
         ),
       ];
-
       when(movieDatasource.getListTrendingMovies)
           .thenAnswer((_) async => movies);
       final result = await movieRepositoryImp.getListTrendingMovies();
       expect(result, Right(movies));
-      verify(movieDatasource.getListTrendingMovies);
-      verifyNoMoreInteractions(movieDatasource);
     });
 
     test(
@@ -86,12 +82,17 @@ void main() {
         () async {
       when(movieDatasource.getListTrendingMovies)
           .thenThrow(const ServerException());
-
       final result = await movieRepositoryImp.getListTrendingMovies();
-
       expect(result, Left(ServerFailure()));
-      verify(movieDatasource.getListTrendingMovies);
-      verifyNoMoreInteractions(movieDatasource);
+    });
+
+    test(
+        'should return a notFoundFailure when calls the datasource is unsuccessful',
+        () async {
+      when(movieDatasource.getListTrendingMovies)
+          .thenThrow(const NotFoundException());
+      final result = await movieRepositoryImp.getListTrendingMovies();
+      expect(result, Left(NotFoundFailure()));
     });
   });
 }

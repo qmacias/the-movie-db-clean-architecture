@@ -4,11 +4,11 @@ import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
 
-class GetListMoviesPopularUseCase
+class GetListPopularMoviesUseCase
     implements UseCase<List<MovieEntity>, NoParams> {
   final MovieRepository repository;
 
-  GetListMoviesPopularUseCase({required this.repository});
+  GetListPopularMoviesUseCase({required this.repository});
 
   @override
   Future<Either<Failure, List<MovieEntity>>> call(NoParams params) async {
