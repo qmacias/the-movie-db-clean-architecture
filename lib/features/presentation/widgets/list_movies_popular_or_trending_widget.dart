@@ -28,7 +28,7 @@ class ListMoviePopularOrTrendingWidget extends StatelessWidget {
         }
         if (state is PopularMoviesLoadedState) {
           BlocProvider.of<MovieBloc>(context).add(
-            const TrendingMoviesLoadEvent(listTrendingMovies: []),
+            const TrendingMoviesLoadEvent(),
           );
           return ListMovieWidget(
             moviesList: state.listPopularMovies,

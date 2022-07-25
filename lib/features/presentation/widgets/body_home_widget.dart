@@ -23,9 +23,7 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
 
   initBloc(BuildContext context) {
     blocContext = BlocProvider.of<MovieBloc>(context);
-    blocContext.add(
-      const PopularMoviesLoadEvent(listPopularMovies: []),
-    );
+    blocContext.add(const PopularMoviesLoadEvent());
   }
 
   @override

@@ -35,27 +35,25 @@ void main() {
         ),
       ];
 
-      when(movieDatasource.getListPopularMovies)
-          .thenAnswer((_) async => movies);
-      final result = await movieRepositoryImp.getListPopularMovies();
+      when(movieDatasource.getPopularMovies).thenAnswer((_) async => movies);
+      final result = await movieRepositoryImp.getPopularMovies();
       expect(result, Right(movies));
     });
 
     test(
         'should return a server failure when calls the datasource is unsuccessful',
         () async {
-      when(movieDatasource.getListPopularMovies)
-          .thenThrow(const ServerException());
-      final result = await movieRepositoryImp.getListPopularMovies();
+      when(movieDatasource.getPopularMovies).thenThrow(const ServerException());
+      final result = await movieRepositoryImp.getPopularMovies();
       expect(result, Left(ServerFailure()));
     });
 
     test(
         'should return a notFoundFailure when calls the datasource is unsuccessful',
         () async {
-      when(movieDatasource.getListPopularMovies)
+      when(movieDatasource.getPopularMovies)
           .thenThrow(const NotFoundException());
-      final result = await movieRepositoryImp.getListPopularMovies();
+      final result = await movieRepositoryImp.getPopularMovies();
       expect(result, Left(NotFoundFailure()));
     });
   });
@@ -71,27 +69,26 @@ void main() {
           voteAverage: 1,
         ),
       ];
-      when(movieDatasource.getListTrendingMovies)
-          .thenAnswer((_) async => movies);
-      final result = await movieRepositoryImp.getListTrendingMovies();
+      when(movieDatasource.getTrendingMovies).thenAnswer((_) async => movies);
+      final result = await movieRepositoryImp.getTrendingMovies();
       expect(result, Right(movies));
     });
 
     test(
         "should return a server failure when calls the datasource is unsuccessful",
         () async {
-      when(movieDatasource.getListTrendingMovies)
+      when(movieDatasource.getTrendingMovies)
           .thenThrow(const ServerException());
-      final result = await movieRepositoryImp.getListTrendingMovies();
+      final result = await movieRepositoryImp.getTrendingMovies();
       expect(result, Left(ServerFailure()));
     });
 
     test(
         'should return a notFoundFailure when calls the datasource is unsuccessful',
         () async {
-      when(movieDatasource.getListTrendingMovies)
+      when(movieDatasource.getTrendingMovies)
           .thenThrow(const NotFoundException());
-      final result = await movieRepositoryImp.getListTrendingMovies();
+      final result = await movieRepositoryImp.getTrendingMovies();
       expect(result, Left(NotFoundFailure()));
     });
   });

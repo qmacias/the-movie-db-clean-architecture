@@ -10,12 +10,12 @@ import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_trendi
 class MockMovieRepository extends Mock implements MovieRepository {}
 
 void main() {
-  late GetListTrendingMoviesUsecase usecase;
+  late GetTrendingMoviesUsecase usecase;
   late MovieRepository repository;
 
   setUp(() {
     repository = MockMovieRepository();
-    usecase = GetListTrendingMoviesUsecase(repository: repository);
+    usecase = GetTrendingMoviesUsecase(repository: repository);
   });
 
   group("GetMoviesTrending |", () {
@@ -28,29 +28,28 @@ void main() {
           voteAverage: 1,
         )
       ];
-      when(repository.getListTrendingMovies)
-          .thenAnswer((_) async => Right(movies));
+      when(repository.getTrendingMovies).thenAnswer((_) async => Right(movies));
       final result = await usecase(NoParams());
       expect(result, Right(movies));
-      verify(repository.getListTrendingMovies);
+      verify(repository.getTrendingMovies);
       verifyNoMoreInteractions(repository);
     });
 
     test("should return server error", () async {
-      when(repository.getListTrendingMovies)
+      when(repository.getTrendingMovies)
           .thenAnswer((_) async => Left(ServerFailure()));
       final result = await usecase(NoParams());
       expect(result, Left(ServerFailure()));
-      verify(repository.getListTrendingMovies);
+      verify(repository.getTrendingMovies);
       verifyNoMoreInteractions(repository);
     });
 
     test("should retun a notFoundError", () async {
-      when(repository.getListTrendingMovies)
+      when(repository.getTrendingMovies)
           .thenAnswer((_) async => Left(NotFoundFailure()));
       final result = await usecase(NoParams());
       expect(result, Left(NotFoundFailure()));
-      verify(repository.getListTrendingMovies);
+      verify(repository.getTrendingMovies);
       verifyNoMoreInteractions(repository);
     });
   });

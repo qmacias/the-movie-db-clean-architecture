@@ -13,7 +13,7 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
   TheMoviedbDatasourceImp({required this.client});
 
   @override
-  Future<List<MovieModel>> getListPopularMovies() async {
+  Future<List<MovieModel>> getPopularMovies() async {
     final response = await client.get(
       TheMoviedbEndpoints.popularMovies(ThemovieDBKey.apiKey),
     );
@@ -34,7 +34,7 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
   }
 
   @override
-  Future<List<MovieModel>> getListTrendingMovies() async {
+  Future<List<MovieModel>> getTrendingMovies() async {
     final response = await client.get(
       TheMoviedbEndpoints.trendingMovies(ThemovieDBKey.apiKey),
     );

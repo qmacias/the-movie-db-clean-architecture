@@ -10,12 +10,12 @@ import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_popula
 class MockMovieRepository extends Mock implements MovieRepository {}
 
 void main() {
-  late GetListPopularMoviesUseCase useCase;
+  late GetPopularMoviesUseCase useCase;
   late MovieRepository repository;
 
   setUp(() {
     repository = MockMovieRepository();
-    useCase = GetListPopularMoviesUseCase(repository: repository);
+    useCase = GetPopularMoviesUseCase(repository: repository);
   });
 
   group("GetMoviesPopular |", () {
@@ -31,30 +31,29 @@ void main() {
       ];
       //listen to calls in the repository ↓↓↓
       //when the repository is called at some point side Right is the expected result
-      when(repository.getListPopularMovies)
-          .thenAnswer((_) async => Right(movies));
+      when(repository.getPopularMovies).thenAnswer((_) async => Right(movies));
       //do the call to the usecase ↓↓↓
       final result = await useCase(NoParams());
       //verify the result ↓↓↓
       expect(result, Right(movies));
-      verify(repository.getListPopularMovies);
+      verify(repository.getPopularMovies);
       verifyNoMoreInteractions(repository);
     });
 
     test('should return server error', () async {
-      when(repository.getListPopularMovies)
+      when(repository.getPopularMovies)
           .thenAnswer((_) async => Left(ServerFailure()));
       final result = await useCase(NoParams());
       expect(result, Left(ServerFailure()));
-      verify(repository.getListPopularMovies);
+      verify(repository.getPopularMovies);
       verifyNoMoreInteractions(repository);
     });
     test("should retun a notFoundError", () async {
-      when(repository.getListPopularMovies)
+      when(repository.getPopularMovies)
           .thenAnswer((_) async => Left(NotFoundFailure()));
       final result = await useCase(NoParams());
       expect(result, Left(NotFoundFailure()));
-      verify(repository.getListPopularMovies);
+      verify(repository.getPopularMovies);
       verifyNoMoreInteractions(repository);
     });
   });

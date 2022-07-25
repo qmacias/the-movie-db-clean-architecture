@@ -8,17 +8,15 @@ abstract class MovieEvent extends Equatable {
 }
 
 class PopularMoviesLoadEvent extends MovieEvent {
-  final List<MovieEntity> listPopularMovies;
-  const PopularMoviesLoadEvent({required this.listPopularMovies});
+  const PopularMoviesLoadEvent();
 
   @override
-  List<Object> get props => [listPopularMovies];
+  List<Object> get props => [];
 }
 
 class TrendingMoviesLoadEvent extends MovieEvent {
-  final List<MovieEntity> listTrendingMovies;
-  const TrendingMoviesLoadEvent({required this.listTrendingMovies});
+  const TrendingMoviesLoadEvent();
 
   @override
-  List<Object> get props => [listTrendingMovies];
+  List<Object> get props => [];
 }

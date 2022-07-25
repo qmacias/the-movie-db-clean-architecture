@@ -9,38 +9,36 @@ part 'movie_event.dart';
 part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  final GetListPopularMoviesUseCase getListMoviesPopularUseCase;
-  final GetListTrendingMoviesUsecase getListMoviesTrendingUsecase;
+  final GetPopularMoviesUseCase getMoviesPopularUseCase;
+  final GetTrendingMoviesUsecase getMoviesTrendingUsecase;
 
   MovieBloc({
-    required this.getListMoviesPopularUseCase,
-    required this.getListMoviesTrendingUsecase,
+    required this.getMoviesPopularUseCase,
+    required this.getMoviesTrendingUsecase,
   }) : super(const PopularMovieLoadingState()) {
-    on<PopularMoviesLoadEvent>((event, emit) async {
-      //display circularProgress while making api call
-      emit(const PopularMovieLoadingState());
-      //call my userCases
-      final failureOrSucess = await getListMoviesPopularUseCase(NoParams());
+    on<PopularMoviesLoadEvent>(getPopularMovies);
+    on<TrendingMoviesLoadEvent>(getTrendingMovies);
+  }
 
-      //verify if the call was successful
-      //if my userCases return success, display the data
-      emit(
-        failureOrSucess.fold(
-            (failure) =>
-                const MoviesErrorState(message: "Ops! Something went wrong"),
-            (movies) => PopularMoviesLoadedState(listPopularMovies: movies)),
-      );
-    });
-    on<TrendingMoviesLoadEvent>((event, emit) async {
-      emit(const PopularMovieLoadingState());
+  Future<void> getPopularMovies(event, emit) async {
+    emit(const PopularMovieLoadingState());
+    final failureOrSucess = await getMoviesPopularUseCase(NoParams());
+    emit(
+      failureOrSucess.fold(
+          (failure) =>
+              const MoviesErrorState(message: "Ops! Something went wrong"),
+          (movies) => PopularMoviesLoadedState(listPopularMovies: movies)),
+    );
+  }
 
-      final failureOrSucess = await getListMoviesTrendingUsecase(NoParams());
-      emit(
-        failureOrSucess.fold(
-            (failure) =>
-                const MoviesErrorState(message: "Ops! Something went wrong"),
-            (movies) => TrendingMoviesLoadedState(listTrendingMovies: movies)),
-      );
-    });
+  Future<void> getTrendingMovies(event, emit) async {
+    emit(const TrendingMovieLoadingState());
+    final failureOrSucess = await getMoviesTrendingUsecase(NoParams());
+    emit(
+      failureOrSucess.fold(
+          (failure) =>
+              const MoviesErrorState(message: "Ops! Something went wrong"),
+          (movies) => TrendingMoviesLoadedState(listTrendingMovies: movies)),
+    );
   }
 }

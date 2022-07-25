@@ -9,10 +9,14 @@ abstract class MovieState extends Equatable {
 
 class PopularMovieLoadingState extends MovieState {
   const PopularMovieLoadingState();
+  @override
+  List<Object> get props => [];
 }
 
 class TrendingMovieLoadingState extends MovieState {
   const TrendingMovieLoadingState();
+  @override
+  List<Object> get props => [];
 }
 
 class PopularMoviesLoadedState extends MovieState {

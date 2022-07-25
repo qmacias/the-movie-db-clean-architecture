@@ -23,7 +23,7 @@ void main() {
     test("should a list popular movies when is sucessful", () async {
       when(() => client.get(any())).thenAnswer(
           (_) async => HttpResponse(data: listPopularMock, statusCode: 200));
-      final result = await movieDatasourceImp.getListPopularMovies();
+      final result = await movieDatasourceImp.getPopularMovies();
       expect(result, isA<List<MovieModel>>());
     });
 
@@ -31,7 +31,7 @@ void main() {
         () async {
       when(() => client.get(any())).thenAnswer((_) async =>
           HttpResponse(statusCode: 404, data: "Ops! something went wrong"));
-      final result = movieDatasourceImp.getListPopularMovies();
+      final result = movieDatasourceImp.getPopularMovies();
       expect(result, throwsA(const NotFoundException()));
     });
 
@@ -39,7 +39,7 @@ void main() {
         () async {
       when(() => client.get(any())).thenAnswer((_) async =>
           HttpResponse(statusCode: 503, data: "Ops! something went wrong"));
-      final result = movieDatasourceImp.getListPopularMovies();
+      final result = movieDatasourceImp.getPopularMovies();
       expect(result, throwsA(const ServerException()));
     });
   });
@@ -48,7 +48,7 @@ void main() {
     test("should a list trending movies when is sucessful", () async {
       when(() => client.get(any())).thenAnswer(
           (_) async => HttpResponse(data: listPopularMock, statusCode: 200));
-      final result = await movieDatasourceImp.getListTrendingMovies();
+      final result = await movieDatasourceImp.getTrendingMovies();
       expect(result, isA<List<MovieModel>>());
     });
 
@@ -56,7 +56,7 @@ void main() {
         () async {
       when(() => client.get(any())).thenAnswer((_) async =>
           HttpResponse(statusCode: 404, data: "Ops! something went wrong"));
-      final result = movieDatasourceImp.getListTrendingMovies();
+      final result = movieDatasourceImp.getTrendingMovies();
       expect(result, throwsA(const NotFoundException()));
     });
 
@@ -64,7 +64,7 @@ void main() {
         () async {
       when(() => client.get(any())).thenAnswer((_) async =>
           HttpResponse(statusCode: 503, data: "Ops! something went wrong"));
-      final result = movieDatasourceImp.getListTrendingMovies();
+      final result = movieDatasourceImp.getTrendingMovies();
       expect(result, throwsA(const ServerException()));
     });
   });
