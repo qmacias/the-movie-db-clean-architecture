@@ -4,6 +4,7 @@ import 'package:the_movies_db_clean_architecture/core/utils/constants/custom_col
 import 'package:the_movies_db_clean_architecture/core/utils/constants/custom_styles.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/enums/enums.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/helpers/date_formatter.dart';
+import 'package:the_movies_db_clean_architecture/core/utils/keys/themoviedb_key.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/pages/home_page_mixin.dart';
 
 class ItemMovieWidget extends StatefulWidget {
@@ -24,18 +25,6 @@ class ItemMovieWidget extends StatefulWidget {
 }
 
 class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
-  selectColorPercentIndicator(int voteAverage) {
-    if (voteAverage >= 70) {
-      return Colors.green;
-    } else if (voteAverage < 70 && voteAverage > 50) {
-      return Colors.yellow;
-    } else if (voteAverage < 50 && voteAverage > 20) {
-      return Colors.orange;
-    } else {
-      return Colors.red;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,7 +43,7 @@ class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: Image.network(
-                    "https://image.tmdb.org/t/p/w500${widget.imageURL}",
+                    "${ThemovieDBKey.baseUrlImage}${widget.imageURL}",
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) {
                         return child;
