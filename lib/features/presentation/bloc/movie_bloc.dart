@@ -16,11 +16,11 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     required this.getMoviesPopularUseCase,
     required this.getMoviesTrendingUsecase,
   }) : super(const PopularMovieLoadingState()) {
-    on<PopularMoviesLoadEvent>(getPopularMovies);
-    on<TrendingMoviesLoadEvent>(getTrendingMovies);
+    on<PopularMoviesLoadEvent>(_getPopularMovies);
+    on<TrendingMoviesLoadEvent>(_getTrendingMovies);
   }
 
-  Future<void> getPopularMovies(event, emit) async {
+  Future<void> _getPopularMovies(event, emit) async {
     emit(const PopularMovieLoadingState());
     final failureOrSucess = await getMoviesPopularUseCase(NoParams());
     emit(
@@ -31,7 +31,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     );
   }
 
-  Future<void> getTrendingMovies(event, emit) async {
+  Future<void> _getTrendingMovies(event, emit) async {
     emit(const TrendingMovieLoadingState());
     final failureOrSucess = await getMoviesTrendingUsecase(NoParams());
     emit(

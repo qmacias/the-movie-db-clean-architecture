@@ -18,16 +18,6 @@ void main() {
   late MovieBloc movieBloc;
 
   setUp(() {
-    registerFallbackValue(
-      const PopularMoviesLoadEvent(),
-    );
-    registerFallbackValue(
-      const MoviesErrorState(message: "Ops! Something went wrong"),
-    );
-    registerFallbackValue(const PopularMoviesLoadedState(
-      listPopularMovies: <MovieEntity>[],
-    ));
-
     movieBloc = MockMovieBloc();
   });
 
@@ -70,14 +60,16 @@ void main() {
       await tester.pumpWidget(
         makeTestableWidget(
           child: const ListMoviePopularOrTrendingWidget(
-              movieTypeEnum: MoviesTypeEnum.popularMovies),
+            movieTypeEnum: MoviesTypeEnum.popularMovies,
+          ),
           movieBloc: movieBloc,
         ),
       );
 
       await expectLater(find.byType(SkeletonMovieWidget), findsWidgets);
       await tester.pump();
-      //await expectLater(find.byKey(const ValueKey("error-message")), findsWidgets);
+      //TODO - implement the test
+      //expect(find.byKey(const ValueKey("error")), findsOneWidget);
     });
 
     testWidgets("should return a widget BlocBuilder", (tester) async {

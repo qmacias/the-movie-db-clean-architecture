@@ -4,7 +4,6 @@ import 'package:the_movies_db_clean_architecture/core/utils/constants/custom_col
 import 'package:the_movies_db_clean_architecture/core/utils/constants/custom_styles.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/enums/enums.dart';
 import 'package:the_movies_db_clean_architecture/core/utils/helpers/date_formatter.dart';
-import 'package:the_movies_db_clean_architecture/core/utils/keys/themoviedb_key.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/pages/home_page_mixin.dart';
 
 class ItemMovieWidget extends StatefulWidget {
@@ -43,7 +42,7 @@ class _ItemMovieWidgetState extends State<ItemMovieWidget> with HomePageMixin {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: Image.network(
-                    "${ThemovieDBKey.baseUrlImage}${widget.imageURL}",
+                    widget.imageURL,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) {
                         return child;
