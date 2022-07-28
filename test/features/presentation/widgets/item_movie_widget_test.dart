@@ -16,18 +16,14 @@ void main() {
   late MovieBloc movieBloc;
 
   setUp(() {
-    registerFallbackValue(
-      const PopularMoviesLoadEvent(),
-    );
-    registerFallbackValue(const PopularMoviesLoadedState(
-      listPopularMovies: <MovieEntity>[],
-    ));
-
     movieBloc = MockMovieBloc();
   });
 
   group("Widget ItemMovieWidget |", () {
     testWidgets('should return the main widgets', (tester) async {
+      when(() => movieBloc.state).thenReturn(
+        const PopularMoviesLoadedState(listPopularMovies: <MovieEntity>[]),
+      );
       await mockNetworkImagesFor(() async => await tester.pumpWidget(
             makeTestableWidget(
               child: const ItemMovieWidget(
@@ -39,26 +35,6 @@ void main() {
               movieBloc: movieBloc,
             ),
           ));
-      when(() => movieBloc.state).thenReturn(const PopularMovieLoadingState());
-
-      whenListen(
-        movieBloc,
-        Stream.fromIterable([
-          const PopularMovieLoadingState(),
-          const PopularMoviesLoadedState(listPopularMovies: <MovieEntity>[]),
-        ]),
-      );
-      await tester.pumpWidget(
-        makeTestableWidget(
-          child: const ItemMovieWidget(
-            title: "The Princess",
-            voteAverage: 75,
-            imageURL: "/9pCoqX24a6rE981fY1O3PmhiwrB.jpg",
-            date: "2022-06-16",
-          ),
-          movieBloc: movieBloc,
-        ),
-      );
 
       expect(find.byType(Column), findsWidgets);
       expect(find.byType(Stack), findsWidgets);

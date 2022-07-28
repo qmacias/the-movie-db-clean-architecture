@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -47,16 +48,11 @@ void main() {
       expect(find.byType(ListMovieWidget), findsOneWidget);
     });
 
-    testWidgets("should return the widgets loading and error.", (tester) async {
-      when(() => movieBloc.state).thenReturn(const PopularMovieLoadingState());
+    testWidgets("should return the widgets when call errorState.",
+        (WidgetTester tester) async {
+      when(() => movieBloc.state).thenReturn(
+          const MoviesErrorState(message: "Ops! Something went wrong."));
 
-      whenListen(
-        movieBloc,
-        Stream.fromIterable([
-          const PopularMovieLoadingState(),
-          const MoviesErrorState(message: "Ops! Something went wrong."),
-        ]),
-      );
       await tester.pumpWidget(
         makeTestableWidget(
           child: const ListMoviePopularOrTrendingWidget(
@@ -66,22 +62,16 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(SkeletonMovieWidget), findsWidgets);
       await tester.pump();
-      //TODO - implement the test
-      //expect(find.byKey(const ValueKey("error")), findsOneWidget);
+      expect(find.byKey(const ValueKey("error")), findsOneWidget);
+      expect(find.byType(Column), findsOneWidget);
+      expect(find.byType(Text), findsWidgets);
+      expect(find.byType(ElevatedButton), findsOneWidget);
     });
 
     testWidgets("should return a widget BlocBuilder", (tester) async {
       when(() => movieBloc.state).thenReturn(const PopularMovieLoadingState());
 
-      whenListen(
-        movieBloc,
-        Stream.fromIterable([
-          const PopularMovieLoadingState(),
-          const PopularMoviesLoadedState(listPopularMovies: <MovieEntity>[]),
-        ]),
-      );
       await tester.pumpWidget(
         makeTestableWidget(
           child: const ListMoviePopularOrTrendingWidget(

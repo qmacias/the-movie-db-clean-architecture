@@ -64,7 +64,9 @@ class ListMoviePopularOrTrendingWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.7,
               child: ElevatedButton(
                 onPressed: () {
-                  //ReLoad Movies
+                  BlocProvider.of<MovieBloc>(context).add(
+                    const PopularMoviesLoadEvent(),
+                  );
                 },
                 child: const Text(
                   "Tentar Novamente",

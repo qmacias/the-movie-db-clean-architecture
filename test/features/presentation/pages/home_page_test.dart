@@ -16,10 +16,6 @@ void main() {
   late MovieBloc movieBloc;
 
   setUpAll(() {
-    registerFallbackValue(const PopularMoviesLoadEvent());
-    registerFallbackValue(const PopularMoviesLoadedState(
-      listPopularMovies: <MovieEntity>[],
-    ));
     movieBloc = MockMovieBloc();
   });
 

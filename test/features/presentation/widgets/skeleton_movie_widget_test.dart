@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:skeletons/skeletons.dart';
-import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/bloc/movie_bloc.dart';
 import 'package:the_movies_db_clean_architecture/features/presentation/widgets/skeleton_movie_widget.dart';
 
@@ -16,13 +15,6 @@ void main() {
   late MovieBloc movieBloc;
 
   setUp(() {
-    registerFallbackValue(
-      const PopularMoviesLoadEvent(),
-    );
-    registerFallbackValue(const PopularMoviesLoadedState(
-      listPopularMovies: <MovieEntity>[],
-    ));
-
     movieBloc = MockMovieBloc();
   });
 
@@ -30,13 +22,6 @@ void main() {
     testWidgets('should return the main widgets', (tester) async {
       when(() => movieBloc.state).thenReturn(const PopularMovieLoadingState());
 
-      whenListen(
-        movieBloc,
-        Stream.fromIterable([
-          const PopularMovieLoadingState(),
-          const PopularMoviesLoadedState(listPopularMovies: <MovieEntity>[]),
-        ]),
-      );
       await tester.pumpWidget(
         makeTestableWidget(
           child: const SkeletonMovieWidget(),
