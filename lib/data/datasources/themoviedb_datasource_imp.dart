@@ -29,7 +29,7 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
     } else if (response.statusCode == 404) {
       throw const NotFoundException();
     } else {
-      throw Exception();
+      throw const ExecptionGenerics();
     }
   }
 
@@ -50,7 +50,7 @@ class TheMoviedbDatasourceImp implements MovieDatasource {
     } else if (response.statusCode == 404) {
       throw const NotFoundException();
     } else {
-      throw Exception();
+      throw const ExecptionGenerics();
     }
   }
 }

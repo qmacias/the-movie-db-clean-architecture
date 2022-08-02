@@ -42,6 +42,14 @@ void main() {
       final result = movieDatasourceImp.getPopularMovies();
       expect(result, throwsA(const ServerException()));
     });
+
+    test("should throw a Exception Generics when the call is not successful",
+        () {
+      when(() => client.get(any())).thenAnswer((_) async =>
+          HttpResponse(statusCode: 500, data: "Ops! something went wrong"));
+      final result = movieDatasourceImp.getPopularMovies();
+      expect(result, throwsA(const ExecptionGenerics()));
+    });
   });
 
   group("Datasource TrendingMovies |", () {
@@ -66,6 +74,14 @@ void main() {
           HttpResponse(statusCode: 503, data: "Ops! something went wrong"));
       final result = movieDatasourceImp.getTrendingMovies();
       expect(result, throwsA(const ServerException()));
+    });
+
+    test("should throw a Exception Generics when the call is not successful",
+        () {
+      when(() => client.get(any())).thenAnswer((_) async =>
+          HttpResponse(statusCode: 500, data: "Ops! something went wrong"));
+      final result = movieDatasourceImp.getTrendingMovies();
+      expect(result, throwsA(const ExecptionGenerics()));
     });
   });
 }
