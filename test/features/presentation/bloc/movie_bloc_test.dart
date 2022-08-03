@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/failures.dart';
-import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_popular_movies_usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_trending_movies_usecase.dart';
@@ -33,11 +32,13 @@ void main() {
     blocTest<MovieBloc, MovieState>(
       'should emits [LoadingState, LoadedState] when LoadEvent is added.',
       setUp: () {
-        when(() => getListPopularMoviesUseCase(NoParams()))
+        when(() => getListPopularMoviesUseCase(0))
             .thenAnswer((_) async => const Right(<MovieEntity>[]));
       },
       build: () => blocMovie,
-      act: (bloc) => bloc.add(const PopularMoviesLoadEvent()),
+      act: (bloc) => bloc.add(
+        const PopularMoviesLoadEvent(page: 0),
+      ),
       expect: () => <MovieState>[
         const PopularMovieLoadingState(),
         const PopularMoviesLoadedState(listPopularMovies: <MovieEntity>[]),
@@ -45,20 +46,24 @@ void main() {
     );
 
     blocTest('should emits [LoadingState, ErrorState] when LoadEvent is added.',
-        setUp: () => when(() => getListPopularMoviesUseCase(NoParams()))
+        setUp: () => when(() => getListPopularMoviesUseCase(0))
             .thenAnswer((_) async => Left(ServerFailure())),
         build: () => blocMovie,
-        act: (MovieBloc bloc) => bloc.add(const PopularMoviesLoadEvent()),
+        act: (MovieBloc bloc) => bloc.add(
+              const PopularMoviesLoadEvent(page: 0),
+            ),
         expect: () => <MovieState>[
               const PopularMovieLoadingState(),
               const MoviesErrorState(message: "Ops! Something went wrong"),
             ]);
 
     blocTest('should emit [LoadingState, ErrorState] when LoadEvent is added.',
-        setUp: () => when(() => getListPopularMoviesUseCase(NoParams()))
+        setUp: () => when(() => getListPopularMoviesUseCase(0))
             .thenAnswer((_) async => Left(NotFoundFailure())),
         build: () => blocMovie,
-        act: (MovieBloc bloc) => bloc.add(const PopularMoviesLoadEvent()),
+        act: (MovieBloc bloc) => bloc.add(
+              const PopularMoviesLoadEvent(page: 0),
+            ),
         expect: () => <MovieState>[
               const PopularMovieLoadingState(),
               const MoviesErrorState(message: "Ops! Something went wrong"),
@@ -69,7 +74,7 @@ void main() {
     blocTest<MovieBloc, MovieState>(
       'should emits [LoadingState, LoadedState] when LoadEvent is added.',
       setUp: () {
-        when(() => getListTrendingMoviesUseCase(NoParams()))
+        when(() => getListTrendingMoviesUseCase(0))
             .thenAnswer((_) async => const Right(<MovieEntity>[]));
       },
       build: () => blocMovie,
@@ -81,7 +86,7 @@ void main() {
     );
 
     blocTest('should emits [LoadingState, ErrorState] when LoadEvent is added.',
-        setUp: () => when(() => getListTrendingMoviesUseCase(NoParams()))
+        setUp: () => when(() => getListTrendingMoviesUseCase(0))
             .thenAnswer((_) async => Left(ServerFailure())),
         build: () => blocMovie,
         act: (MovieBloc bloc) => bloc.add(const TrendingMoviesLoadEvent()),
@@ -91,7 +96,7 @@ void main() {
             ]);
 
     blocTest('should emit [LoadingState, ErrorState] when LoadEvent is added.',
-        setUp: () => when(() => getListTrendingMoviesUseCase(NoParams()))
+        setUp: () => when(() => getListTrendingMoviesUseCase(0))
             .thenAnswer((_) async => Left(NotFoundFailure())),
         build: () => blocMovie,
         act: (MovieBloc bloc) => bloc.add(const TrendingMoviesLoadEvent()),

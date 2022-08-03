@@ -14,7 +14,7 @@ class BodyHomeWidget extends StatefulWidget {
 
 class _BodyHomeWidgetState extends State<BodyHomeWidget> {
   late MovieBloc blocContext;
-
+  int page = 0;
   @override
   void initState() {
     initBloc(context);
@@ -23,7 +23,7 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
 
   initBloc(BuildContext context) {
     blocContext = BlocProvider.of<MovieBloc>(context);
-    blocContext.add(const PopularMoviesLoadEvent());
+    blocContext.add(const PopularMoviesLoadEvent(page: 0));
   }
 
   @override

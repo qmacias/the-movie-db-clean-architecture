@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_popular_movies_usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_trending_movies_usecase.dart';
@@ -22,7 +21,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   Future<void> _getPopularMovies(event, emit) async {
     emit(const PopularMovieLoadingState());
-    final failureOrSucess = await getMoviesPopularUseCase(NoParams());
+    final failureOrSucess = await getMoviesPopularUseCase(0);
     emit(
       failureOrSucess.fold(
           (failure) =>
@@ -33,7 +32,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   Future<void> _getTrendingMovies(event, emit) async {
     emit(const TrendingMovieLoadingState());
-    final failureOrSucess = await getMoviesTrendingUsecase(NoParams());
+    final failureOrSucess = await getMoviesTrendingUsecase(0);
     emit(
       failureOrSucess.fold(
           (failure) =>

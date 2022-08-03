@@ -10,7 +10,7 @@ class MovieRepositoryImp implements MovieRepository {
 
   MovieRepositoryImp({required this.movieDatasource});
   @override
-  Future<Either<Failure, List<MovieEntity>>> getPopularMovies() async {
+  Future<Either<Failure, List<MovieEntity>>> getPopularMovies(int page) async {
     try {
       final result = await movieDatasource.getPopularMovies();
       return Right(result);
@@ -22,7 +22,7 @@ class MovieRepositoryImp implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, List<MovieEntity>>> getTrendingMovies() async {
+  Future<Either<Failure, List<MovieEntity>>> getTrendingMovies(int page) async {
     try {
       final result = await movieDatasource.getTrendingMovies();
       return Right(result);

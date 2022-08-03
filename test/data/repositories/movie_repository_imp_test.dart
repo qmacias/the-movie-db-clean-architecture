@@ -36,7 +36,7 @@ void main() {
       ];
 
       when(movieDatasource.getPopularMovies).thenAnswer((_) async => movies);
-      final result = await movieRepositoryImp.getPopularMovies();
+      final result = await movieRepositoryImp.getPopularMovies(0);
       expect(result, Right(movies));
     });
 
@@ -44,7 +44,7 @@ void main() {
         'should return a server failure when calls the datasource is unsuccessful',
         () async {
       when(movieDatasource.getPopularMovies).thenThrow(const ServerException());
-      final result = await movieRepositoryImp.getPopularMovies();
+      final result = await movieRepositoryImp.getPopularMovies(0);
       expect(result, Left(ServerFailure()));
     });
 
@@ -53,7 +53,7 @@ void main() {
         () async {
       when(movieDatasource.getPopularMovies)
           .thenThrow(const NotFoundException());
-      final result = await movieRepositoryImp.getPopularMovies();
+      final result = await movieRepositoryImp.getPopularMovies(0);
       expect(result, Left(NotFoundFailure()));
     });
   });
@@ -70,7 +70,7 @@ void main() {
         ),
       ];
       when(movieDatasource.getTrendingMovies).thenAnswer((_) async => movies);
-      final result = await movieRepositoryImp.getTrendingMovies();
+      final result = await movieRepositoryImp.getTrendingMovies(0);
       expect(result, Right(movies));
     });
 
@@ -79,7 +79,7 @@ void main() {
         () async {
       when(movieDatasource.getTrendingMovies)
           .thenThrow(const ServerException());
-      final result = await movieRepositoryImp.getTrendingMovies();
+      final result = await movieRepositoryImp.getTrendingMovies(0);
       expect(result, Left(ServerFailure()));
     });
 
@@ -88,7 +88,7 @@ void main() {
         () async {
       when(movieDatasource.getTrendingMovies)
           .thenThrow(const NotFoundException());
-      final result = await movieRepositoryImp.getTrendingMovies();
+      final result = await movieRepositoryImp.getTrendingMovies(0);
       expect(result, Left(NotFoundFailure()));
     });
   });

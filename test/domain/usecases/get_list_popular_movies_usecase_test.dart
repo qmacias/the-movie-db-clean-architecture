@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:the_movies_db_clean_architecture/core/errors/failures.dart';
-import 'package:the_movies_db_clean_architecture/core/usecase/usecase.dart';
 import 'package:the_movies_db_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:the_movies_db_clean_architecture/domain/repositories/movie_repository.dart';
 import 'package:the_movies_db_clean_architecture/domain/usecases/get_list_popular_movies_usecase.dart';
@@ -31,29 +30,30 @@ void main() {
       ];
       //listen to calls in the repository ↓↓↓
       //when the repository is called at some point side Right is the expected result
-      when(repository.getPopularMovies).thenAnswer((_) async => Right(movies));
+      when(() => repository.getPopularMovies(0))
+          .thenAnswer((_) async => Right(movies));
       //do the call to the usecase ↓↓↓
-      final result = await useCase(NoParams());
+      final result = await useCase(0);
       //verify the result ↓↓↓
       expect(result, Right(movies));
-      verify(repository.getPopularMovies);
+      verify(() => repository.getPopularMovies(0));
       verifyNoMoreInteractions(repository);
     });
 
     test('should return server error', () async {
-      when(repository.getPopularMovies)
+      when(() => repository.getPopularMovies(0))
           .thenAnswer((_) async => Left(ServerFailure()));
-      final result = await useCase(NoParams());
+      final result = await useCase(0);
       expect(result, Left(ServerFailure()));
-      verify(repository.getPopularMovies);
+      verify(() => repository.getPopularMovies(0));
       verifyNoMoreInteractions(repository);
     });
     test("should retun a notFoundError", () async {
-      when(repository.getPopularMovies)
+      when(() => repository.getPopularMovies(0))
           .thenAnswer((_) async => Left(NotFoundFailure()));
-      final result = await useCase(NoParams());
+      final result = await useCase(0);
       expect(result, Left(NotFoundFailure()));
-      verify(repository.getPopularMovies);
+      verify(() => repository.getPopularMovies(0));
       verifyNoMoreInteractions(repository);
     });
   });

@@ -12,7 +12,9 @@ void main() {
   late MovieBloc movieBloc;
 
   setUpAll(() {
-    registerFallbackValue(const PopularMoviesLoadEvent());
+    registerFallbackValue(
+      const PopularMoviesLoadEvent(page: 0),
+    );
     registerFallbackValue(const PopularMoviesLoadedState(
       listPopularMovies: <MovieEntity>[],
     ));
