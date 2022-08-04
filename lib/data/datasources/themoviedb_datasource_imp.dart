@@ -9,20 +9,22 @@ import 'package:the_movies_db_clean_architecture/data/models/movie_model.dart';
 
 class TheMoviedbDatasourceImp implements MovieDatasource {
   final HttpClient client;
+  int currentPage = 1;
+  List<MovieModel> listPopularMovies = [];
 
   TheMoviedbDatasourceImp({required this.client});
 
   @override
   Future<List<MovieModel>> getPopularMovies() async {
     final response = await client.get(
-      TheMoviedbEndpoints.popularMovies(ThemovieDBKey.apiKey),
+      TheMoviedbEndpoints.popularMovies(ThemovieDBKey.apiKey, currentPage),
     );
     if (response.statusCode == 200) {
       var json = jsonDecode(response.data);
-      List<MovieModel> listPopularMovies = [];
-      listPopularMovies = json['results']
-          .map<MovieModel>((movie) => MovieModel.fromJson(movie))
-          .toList();
+      for (var movie in json['results']) {
+        listPopularMovies.add(MovieModel.fromJson(movie));
+      }
+      currentPage++;
       return listPopularMovies;
     } else if (response.statusCode == 503) {
       throw const ServerException();

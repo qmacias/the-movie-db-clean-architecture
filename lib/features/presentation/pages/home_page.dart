@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget with HomePageMixin {
     return Scaffold(
         appBar: AppBar(
           title: Image.asset(
-            'assets/images/tmdb_logo.JPEG',
+            'lib/core/assets/images/tmdb_logo.JPEG',
             height: 80,
           ),
           centerTitle: true,

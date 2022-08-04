@@ -13,7 +13,7 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(
-      const PopularMoviesLoadEvent(page: 0),
+      const PopularMoviesLoadEvent(),
     );
     registerFallbackValue(const PopularMoviesLoadedState(
       listPopularMovies: <MovieEntity>[],

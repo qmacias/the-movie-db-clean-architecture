@@ -37,7 +37,7 @@ void main() {
       },
       build: () => blocMovie,
       act: (bloc) => bloc.add(
-        const PopularMoviesLoadEvent(page: 0),
+        const PopularMoviesLoadEvent(),
       ),
       expect: () => <MovieState>[
         const PopularMovieLoadingState(),
@@ -50,7 +50,7 @@ void main() {
             .thenAnswer((_) async => Left(ServerFailure())),
         build: () => blocMovie,
         act: (MovieBloc bloc) => bloc.add(
-              const PopularMoviesLoadEvent(page: 0),
+              const PopularMoviesLoadEvent(),
             ),
         expect: () => <MovieState>[
               const PopularMovieLoadingState(),
@@ -62,7 +62,7 @@ void main() {
             .thenAnswer((_) async => Left(NotFoundFailure())),
         build: () => blocMovie,
         act: (MovieBloc bloc) => bloc.add(
-              const PopularMoviesLoadEvent(page: 0),
+              const PopularMoviesLoadEvent(),
             ),
         expect: () => <MovieState>[
               const PopularMovieLoadingState(),

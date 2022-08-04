@@ -65,7 +65,7 @@ class ListMoviePopularOrTrendingWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   BlocProvider.of<MovieBloc>(context).add(
-                    const PopularMoviesLoadEvent(page: 0),
+                    const PopularMoviesLoadEvent(),
                   );
                 },
                 child: const Text(
